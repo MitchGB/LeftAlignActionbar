@@ -142,3 +142,26 @@
         this.width = width;
         this.effectiveWidth = effectiveWidth;
     }
+
+
+
+    public int getBoldLength() {
+        if (this == CharRepo.SPACE) return this.width;
+        return this.width + 1;
+    }
+
+    public static CharRepo getDefaultFontInfo(char c) {
+        for (CharRepo dFI : CharRepo.values()) {
+            if (dFI.getCh() == c) return dFI;
+        }
+        return CharRepo.DEFAULT;
+    }
+
+    public static int getPixelWidth(String str){
+        int val = 0;
+        for(char ch : str.toCharArray()){
+            val += CharRepo.getDefaultFontInfo(ch).getEffectiveWidth();
+            val += 1; //acount for spacing
+        }
+        return val;
+    }
